@@ -1,0 +1,22 @@
+package com.rakesh.hashkeynretrofit.util;
+
+/**
+ * Created by Admin on 10-02-2017.
+ */
+
+public class HashGenerationException extends Exception {
+
+    private static final long serialVersionUID = 1L;
+
+    public HashGenerationException() {
+        super();
+    }
+
+    public HashGenerationException(String message) {
+        super(message);
+    }
+
+    public HashGenerationException(String message, Throwable throwable) {
+        super(message, throwable);
+    }
+}
