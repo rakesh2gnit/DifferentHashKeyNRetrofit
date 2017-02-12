@@ -29,7 +29,7 @@ public class Channels implements Parcelable
     @JsonProperty("channels")
     private List<Channel> channels = null;
     @JsonProperty("lastUpdatedAt")
-    private int lastUpdatedAt;
+    private long lastUpdatedAt;
     @JsonIgnore
     private Map<String, Object> additionalProperties = new HashMap<String, Object>();
     public final static Parcelable.Creator<Channels> CREATOR = new Creator<Channels>() {
@@ -64,12 +64,12 @@ public class Channels implements Parcelable
     }
 
     @JsonProperty("lastUpdatedAt")
-    public int getLastUpdatedAt() {
+    public long getLastUpdatedAt() {
         return lastUpdatedAt;
     }
 
     @JsonProperty("lastUpdatedAt")
-    public void setLastUpdatedAt(int lastUpdatedAt) {
+    public void setLastUpdatedAt(long lastUpdatedAt) {
         this.lastUpdatedAt = lastUpdatedAt;
     }
 

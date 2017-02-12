@@ -21,6 +21,8 @@
         <activity android:name=".retrofit.RetrofitActivity" />
         <activity android:name=".retrofit.activity.CountryActivity" />
         <activity android:name=".retrofit.activity.ChannelActivity" />
+        <activity android:name=".retrofit.activity.LoginActivity"/>
+        <activity android:name=".retrofit.activity.ForgotPassword"/>
     </application>
 
 </manifest>

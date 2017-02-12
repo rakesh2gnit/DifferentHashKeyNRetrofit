@@ -8,15 +8,23 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
+import com.rakesh.hashkeynretrofit.AppSingleton;
 import com.rakesh.hashkeynretrofit.R;
+import com.rakesh.hashkeynretrofit.retrofit.activity.ChannelActivity;
 import com.rakesh.hashkeynretrofit.retrofit.activity.CountryActivity;
+import com.rakesh.hashkeynretrofit.retrofit.activity.ForgotPassword;
+import com.rakesh.hashkeynretrofit.retrofit.activity.LoginActivity;
 import com.rakesh.hashkeynretrofit.retrofit.model.Channels;
 import com.rakesh.hashkeynretrofit.retrofit.model.Country;
 import com.rakesh.hashkeynretrofit.util.Constant;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import okhttp3.Interceptor;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -65,10 +73,12 @@ public class RetrofitActivity extends AppCompatActivity implements View.OnClickL
             getChannels();
         }
         if (v.getId() == R.id.btn_login) {
-
+            Intent intentCountry = new Intent(RetrofitActivity.this, LoginActivity.class);
+            startActivityForResult(intentCountry, Constant.LoginActivity);
         }
         if (v.getId() == R.id.btn_forgotpwd) {
-
+            Intent intentCountry = new Intent(RetrofitActivity.this, ForgotPassword.class);
+            startActivityForResult(intentCountry, Constant.ForgotPassword);
         }
         if (v.getId() == R.id.btn_changepwd) {
 
@@ -87,7 +97,8 @@ public class RetrofitActivity extends AppCompatActivity implements View.OnClickL
         }
     }
 
-    private void getChannels(){
+    private void getChannels() {
+
         AppApi apiService =
                 AppClient.getClient().create(AppApi.class);
 
@@ -105,9 +116,11 @@ public class RetrofitActivity extends AppCompatActivity implements View.OnClickL
                 Log.e("response isSuccessful: ", "" + response.isSuccessful());
                 Log.e("response raw: ", "" + response.raw());
 
-                /*Intent intentCountry = new Intent(RetrofitActivity.this, ChannelActivity.class);
-                intentCountry.putParcelableArrayListExtra("channellist", new ArrayList<Channels>(response.body()));
-                startActivityForResult(intentCountry, Constant.ChannelActivity);*/
+                AppSingleton.sSavePreferences(RetrofitActivity.this, Constant.sharePrefChannelKey, "");
+                AppSingleton.sSavePreferences(RetrofitActivity.this, Constant.sharePrefChannelKey, response.body().toString());
+                Intent intentCountry = new Intent(RetrofitActivity.this, ChannelActivity.class);
+                //intentCountry.putParcelableArrayListExtra("channellist", new ArrayList<Channels>(response.body()));
+                startActivityForResult(intentCountry, Constant.ChannelActivity);
             }
 
             @Override
@@ -120,7 +133,6 @@ public class RetrofitActivity extends AppCompatActivity implements View.OnClickL
     }
 
     private void getCountries() {
-
         AppApi apiService =
                 AppClient.getClient().create(AppApi.class);
 
